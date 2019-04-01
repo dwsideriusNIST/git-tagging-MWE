@@ -1,0 +1,175 @@
+% This is the Working Version (master branch)
+\pdfminorversion=4
+
+\documentclass[preprint,pre,showkeys,12pt,superscriptaddress,nofootinbib]{revtex4-1}
+% \documentclass[superscriptaddress,twocolumn,10pt]{revtex4-1}
+
+% Standard Packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}   % use for hypertext links, including those to external documents and URLs
+\usepackage{epstopdf}
+\usepackage{xspace}
+\usepackage{grffile}
+\usepackage{xr}
+
+%Other packages I use occasionally
+%\usepackage{verbatim}   % useful for program listings
+%\usepackage{color}      % use if color is used in text
+%\usepackage{subfigure}  % use for side-by-side figures
+%\usepackage{amsthm}
+
+\raggedbottom           % don't add extra vertical space
+
+% Macros for editing/commenting
+\newcommand{\revision}[1]{\textbf{#1}}
+\newcommand{\previous}[1]{\textit{#1}}
+\newcommand{\AArm}{\ensuremath{\textrm{\AA}}\xspace}
+\newcommand{\CMT}[2]{\textcolor{red}{\textbf{\textit{#1: #2}}}}
+\newcommand{\REFs}[1]{\noindent\textbf{[INS. REFs #1]}}
+
+% Macros for often-used symbols/functions
+\def\s*{{^{\ast}}}
+\def\deg{{^{\circ}}}
+\def\lnPi{{\ln \Pi}}
+\def\macroS{{\mathbf{S}}}
+\def\macroT{{\mathbf{T}}}
+\def\methane{CH\ensuremath{_4}\xspace}
+\def\CD4{CD\ensuremath{_4}\xspace}
+\def\Tstar{\ensuremath{k_{\rm B} T/\epsilon}\xspace}
+\def\kB{\ensuremath{k_{\rm B}}\xspace}
+\newcommand{\ave}[1]{\left<#1\right>}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\super}[1]{\ensuremath{^{\text{#1}}}}
+\newcommand{\sub}[1]{\ensuremath{_{\text{#1}}}}
+
+% External document(s) for referencing
+%\externaldocument[SI-]{SI_Qst_single}
+
+% Path for Graphics
+\graphicspath{{Figures/}}
+
+\begin{document}
+
+\title{Effects of Ideality Assumptions in Calculations of the Isosteric Heat of Adsorption for Single-component Adsorbates\footnote{Official contribution of the National Institute of Standards and Technology; not subject to copyright in the United States.}} 
+
+%Nonideal contributions to the isosteric heat of adsorption; consistency of molecular and macroscopic expressions thereof
+
+\author{Daniel W. Siderius}\email[Corresponding author, email: ]{daniel.siderius@nist.gov}
+\author{Nathan A. Mahynski}
+\author{Vincent K. Shen}
+\affiliation{Chemical Sciences Division, National Institute of Standards and Technology, Gaithersburg, MD 20899, USA}
+
+\keywords{some here}
+\pacs{enter PACS codes here}
+
+\date{\today}
+%\date{Received: XX / Accepted: XX / Published Online: XX}
+
+\begin{abstract}
+Abstract here
+\end{abstract}
+
+\maketitle
+
+\newpage
+\section{Introduction}\label{sec:intro}
+This is a section. Ref\cite{Botan_Hard-sphere_2009}
+Reference CODATA 2017 revision\cite{Newell_CODATA_2017}
+
+\section{Theory of the Isosteric Heat of Adsorption}\label{sec:theory}
+
+The following sections presents derivations of various thermodynamic relationships related to the isosteric heat of adsorption. A number of different derivation paths have been presented in previous discussions\cite{}, but here we choose to following that of  Vuong and Monson\cite{Vuong_Monte_1996}, as it was among the most clear presentations we found in the extant literature. Consequently, what follows is neither unique nor novel in the ultimate results; our discussion will, however, utilize some notational differences and include expanded discussion at certain points in an effort to provide (excessive?) clarity in the mathematical manipulations and the associated thermodynamic interpretation.
+
+First, for notational clarity in our discussion, all thermodynamic properties are extensive unless the property is naturally intensive (e.g., temperature, density, partial-molar properties, etc.) or otherwise explicitly stated. Second, the system under analysis is composed of a reservoir of pure (i.e., single-species) adsorptive molecules at a fixed pressure ($p$) and temperature ($T^b$), termed the ``bulk'' phase and a adsorbent at fixed volume ($V$) and $T^c$ containing (again, pure) adsorbate molecules, termed the ``confined'' phase. (The adsorbent is rigid, in contrast to deformable adsorbents that are the focus of much recent attention\cite{}.) The two phases are in thermal contact, hence $T^b = T^c = T$. The phases may interact through different mechanisms, such as exchange of energy or mass, though this characteristic is not yet defined. The system is shown schematically in Fig. \ref{fig:schematic} and is intended to mimic the chemical and mechanical equilibrium between a source of adsorptive gas and adsorbed gas confined in a rigid nanoscale adsorbent that is examined by laboratory adsorption experiments.
+
+<graphic>
+
+We begin the derivation with an essential definition grounded in a primitive thermodynamic relationship, $\delta q = T dS$. That is, heat flow ($q$) is proportional to the change in entropy ($S$), with temperature as the proportionality constant. Thus, if we consider the transfer of a differential quantity of mass, $dN$ (where $N$ is number of molecules of the adsorptive/adsorbate species), from the bulk phase to the confined phase, the associated heat effect may be written as
+%
+\begin{equation}
+  q = T \left[
+    \left(\dfrac{\partial S^b}{\partial N^b}\right)_{T,p^b}
+    -\left(\dfrac{\partial S^c}{\partial N^c}\right)_{T,V^c}
+  \right]
+  \label{eq:q_basedef}
+\end{equation}
+%
+Notice that the partial derivatives of the phase entropies $S^b$ and $S^c$ with respect to $N^b$ and $N^c$ are taken with constraints consistent with the phase definitions; fixed $p^b$ and $T$ for the bulk phase versus fixed $V$ and $T$ for the (rigid) confined phase. Additionally, $q$ is defined opposite normal conventions such that positive values indicate heat released via the mass transfer process, as adsorption (transfer of mass from bulk to confined) is typically exothermic. Lastly, we have not yet identified the nature of this heat term, though will later show that this definition yields an {\it isosteric} heat.
+
+Now consider the bulk phase, at fixed $T$ and $p$. The relevant free energy potential is, then, the Gibbs Free Energy ($G$), providing the bulk-phase fundamental equations:
+%
+\begin{eqnarray}
+  G^b & = & H^b - TS^b \nonumber \\
+  dG^b & = & -S^b dT + V^b dp^b + \mu^b dN^b
+  \label{eq:bulk_fundeq}
+\end{eqnarray}
+%
+where $H$ and $\mu$ are the enthalpy and chemical potential. Through manipulation of eq \ref{eq:bulk_fundeq}, one may derive the Gibbs-Helmholtz relationship for the bulk phase:
+%
+\begin{equation}
+  T \left(\dfrac{\partial S^b}{\partial N^b}\right)_{T,p^b}
+  = \left(\dfrac{\partial H^b}{\partial N^b}\right)_{T,p^b}
+  - \mu^b
+  \label{eq:bulk_GH}
+\end{equation}
+%
+The first term on the right is the partial molar enthalpy of adsorptive in the bulk phase.
+
+For the confined phase, at fixed $T$ and $V$, the relevant free energy is the Helmholtz Free Energy ($F$), which is associated with the confined-phase fundamental equations:
+%
+\begin{eqnarray}
+  F^c & = & U^c - TS^c \nonumber \\
+  dF^c & = & -S^c dT + \phi^c dV^c + \mu^c dN^c
+  \label{eq:conf_fundeq}
+\end{eqnarray}
+%
+where $U$ is the internal energy, $\phi$ is the grand potential free energy density. The $\phi^c$ term contains both interfacial and pressure-volume contributions and will prove inconsequential; for now we only need a variable conjugate to the system size ($V^c$ in this case)\cite{Vuong_Monte_1996,Cracknell_Adsorption_1995}. (As a point of clarification, we note that the internal energy $U$ includes both kinetic (ideal gas) and configurational terms.) As before, manipulation of eq \ref{eq:conf_fundeq} yields a Gibbs-Helmholtz relationship for the confined phase:
+%
+\begin{equation}
+  T \left(\dfrac{\partial S^c}{\partial N^c}\right)_{T,V^c}
+  = \left(\dfrac{\partial U^c}{\partial N^c}\right)_{T,V^c}
+  - \mu^c
+  \label{eq:conf_GH}
+\end{equation}
+%
+
+Entering eqs \ref{eq:bulk_GH} and \ref{eq:conf_GH} into eq \ref{eq:q_basedef} yields:
+%
+\begin{equation}
+  q = \left(\dfrac{\partial H^b}{\partial N^b}\right)_{T,p^b}
+  - \left(\dfrac{\partial U^c}{\partial N^c}\right)_{T,V^c}
+  \label{eq:q_partials}
+\end{equation}
+%
+Thus, the heat effect $q$ in eq \ref{eq:q_basedef} is equivalent to the difference between the partial molar enthalpy of the bulk phase and the isochoric differential molar internal energy of the confined phase. The following subsections convert eqs \ref{eq:q_basedef} and \ref{eq:q_partials} to forms more convenient for application in experiment or simulation-based measurements.
+
+\section{Another section}
+some text
+
+
+\section{Conclusions}
+
+{\bf Philosophical question:} whether to call it an isosteric {\it heat} or isosteric {\it enthalpy}.
+Based on eq \ref{eq:q_basedef}, it seems perfectly acceptable to call this a {\it heat}; in fact, given that the confined term is not a differential enthalpy, it seems that {\it isosteric enthalpy} is a poor descriptor, if not inaccurate. This can be a point of discussion later in the paper.
+
+
+\section*{Supporting Information}
+The Supporting Information is available free of charge on {publisher's website} at DOI: {\bf insert DOI here}.
+
+I. First SI Section. II. Second SI Section. ...
+
+\section*{Acknowledgments}
+
+\bibliography{bibtex/DWS_jabref}
+\bibliographystyle{apsrev}
+%\input{bib.bbl}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
