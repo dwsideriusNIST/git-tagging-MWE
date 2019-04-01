@@ -1,0 +1,14 @@
+*.aux
+*~
+*.blg
+*.bbl
+*.log
+*.gz
+*.dvi
+*Notes.bib
+*~
+*.ps
+*-eps-converted-to.pdf
+*checkpoint.ipynb
+
+auto/
